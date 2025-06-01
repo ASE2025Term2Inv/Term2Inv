@@ -88,7 +88,7 @@ Example:
     ```
 
 - These scripts will generate the corresponding SMT files and CFG JSON files required by Term2Inv.
-
+- For further details, please refer to the [Code2Inv](https://github.com/PL-ML/code2inv) project.
 ---
 
 ## Acknowledgements
