@@ -1,0 +1,135 @@
+(set-logic LIA)
+
+( declare-const q Int )
+( declare-const q! Int )
+( declare-const r Int )
+( declare-const r! Int )
+( declare-const x Int )
+( declare-const x! Int )
+( declare-const y Int )
+( declare-const y! Int )
+
+( declare-const q_0 Int )
+( declare-const q_1 Int )
+( declare-const q_2 Int )
+( declare-const q_3 Int )
+( declare-const q_4 Int )
+( declare-const r_0 Int )
+( declare-const r_1 Int )
+( declare-const r_2 Int )
+( declare-const r_3 Int )
+( declare-const r_4 Int )
+( declare-const r_5 Int )
+( declare-const x_0 Int )
+( declare-const y_0 Int )
+
+( define-fun inv-f( ( q Int )( r Int )( x Int )( y Int ) ) Bool
+SPLIT_HERE_asdfghjklzxcvbnmqwertyuiop
+)
+
+( define-fun pre-f ( ( q Int )( r Int )( x Int )( y Int )( q_0 Int )( q_1 Int )( q_2 Int )( q_3 Int )( q_4 Int )( r_0 Int )( r_1 Int )( r_2 Int )( r_3 Int )( r_4 Int )( r_5 Int )( x_0 Int )( y_0 Int ) ) Bool
+	( and
+		( = q q_1 )
+		( = r r_1 )
+		( = x x_0 )
+		( = y y_0 )
+		( = q_1 0 )
+		( = r_1 0 )
+		( > x_0 0 )
+		( > y_0 0 )
+		( = q_1 0 )
+		( = r_1 0 )
+	)
+)
+
+( define-fun trans-f ( ( q Int )( r Int )( x Int )( y Int )( q! Int )( r! Int )( x! Int )( y! Int )( q_0 Int )( q_1 Int )( q_2 Int )( q_3 Int )( q_4 Int )( r_0 Int )( r_1 Int )( r_2 Int )( r_3 Int )( r_4 Int )( r_5 Int )( x_0 Int )( y_0 Int ) ) Bool
+	( or
+		( and
+			( = q_2 q )
+			( = r_2 r )
+			( = q_2 q! )
+			( = r_2 r! )
+			( = x x_0 )
+			( = x! x_0 )
+			( = y y_0 )
+			( = y! y_0 )
+		)
+		( and
+			( = q_2 q )
+			( = r_2 r )
+			( > x_0 ( + ( * y_0 q_2 ) r_2 ) )
+			( = r_2 ( - y_0 1 ) )
+			( = r_3 0 )
+			( = q_3 ( + q_2 1 ) )
+			( = q_4 q_3 )
+			( = r_4 r_3 )
+			( = q_4 q! )
+			( = r_4 r! )
+			(= x x_0 )
+			(= x! x_0 )
+			(= y y_0 )
+			(= y! y_0 )
+		)
+		( and
+			( = q_2 q )
+			( = r_2 r )
+			( > x_0 ( + ( * y_0 q_2 ) r_2 ) )
+			( not ( = r_2 ( - y_0 1 ) ) )
+			( = r_5 ( + r_2 1 ) )
+			( = q_4 q_2 )
+			( = r_4 r_5 )
+			( = q_4 q! )
+			( = r_4 r! )
+			(= x x_0 )
+			(= x! x_0 )
+			(= y y_0 )
+			(= y! y_0 )
+		)
+	)
+)
+
+( define-fun post-f ( ( q Int )( r Int )( x Int )( y Int )( q_0 Int )( q_1 Int )( q_2 Int )( q_3 Int )( q_4 Int )( r_0 Int )( r_1 Int )( r_2 Int )( r_3 Int )( r_4 Int )( r_5 Int )( x_0 Int )( y_0 Int ) ) Bool
+	( or
+		( not
+			( and
+				( = q q_2)
+				( = r r_2)
+				( = x x_0)
+				( = y y_0)
+			)
+		)
+		( not
+			( and
+				( not ( > x_0 ( + ( * y_0 q_2 ) r_2 ) ) )
+				( not ( = r_2 ( mod x_0 y_0 ) ) )
+			)
+		)
+	)
+)
+SPLIT_HERE_asdfghjklzxcvbnmqwertyuiop
+( assert ( not
+	( =>
+		( pre-f q r x y q_0 q_1 q_2 q_3 q_4 r_0 r_1 r_2 r_3 r_4 r_5 x_0 y_0  )
+		( inv-f q r x y )
+	)
+))
+
+SPLIT_HERE_asdfghjklzxcvbnmqwertyuiop
+( assert ( not
+	( =>
+		( and
+			( inv-f q r x y )
+			( trans-f q r x y q! r! x! y! q_0 q_1 q_2 q_3 q_4 r_0 r_1 r_2 r_3 r_4 r_5 x_0 y_0 )
+		)
+		( inv-f q! r! x! y! )
+	)
+))
+
+SPLIT_HERE_asdfghjklzxcvbnmqwertyuiop
+( assert ( not
+	( =>
+		( inv-f q r x y  )
+		( post-f q r x y q_0 q_1 q_2 q_3 q_4 r_0 r_1 r_2 r_3 r_4 r_5 x_0 y_0 )
+	)
+))
+
